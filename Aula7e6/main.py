@@ -1,9 +1,6 @@
 import jogos.velha as velha
 import jogos.quatro_em_linha as quatro_em_linha
 import pyfiglet
-import curses
-import time
-import piscar_menu
 
 def main_menu():
     ascii_art = pyfiglet.figlet_format("Menu de Jogos")

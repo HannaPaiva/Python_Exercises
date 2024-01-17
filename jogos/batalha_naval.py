@@ -1,132 +1,128 @@
-import random
+vencedor = 0
+def create_board(size):
+    return [['.' for _ in range(size)] for _ in range(size)]
 
-def criar_tabuleiro(linhas, colunas, num_navios):
+def print_board(board):
+    columns = " ".join(chr(ord('A') + i) for i in range(len(board)))
+    print(f"  {columns}")
+    for i, row in enumerate(board):
+        print(f"{i} {' '.join(row)}")
 
-    tabuleiro = [[' ' for _ in range(colunas)] for _ in range(linhas)]
+def print_hidden_board(board):
+    columns = " ".join(chr(ord('A') + i) for i in range(len(board)))
+    print(f"  {columns}")
+    for i, row in enumerate(board):
+        print(f"{i} {' '.join('.' if cell == 'S' else cell for cell in row)}")
 
-    posicoes_navios = random.sample(range(linhas * colunas), num_navios)
+def convert_coordinates(coord, board_size):
+    try:
+        x = int(coord[1])
+        y = ord(coord[0].upper()) - ord('A')
 
-    for posicao in posicoes_navios:
-        linha = posicao // colunas
-        coluna = posicao % colunas
-        tabuleiro[linha][coluna] = 'N'
+        if 0 <= x < board_size and 0 <= y < board_size:
+            return x, y
+        else:
+            print("Coordenada fora do tabuleiro. Tente novamente.")
+            return convert_coordinates(input("Digite a coordenada (ex: A0): "), board_size)
+    except (ValueError, IndexError):
+        print("Entrada inválida. Tente novamente.")
+        return convert_coordinates(input("Digite a coordenada (ex: A0): "), board_size)
 
-    return tabuleiro, posicoes_navios
+def place_ship(board, start, end):
+    x1, y1 = start
+    x2, y2 = end
+    if x1 == x2:
+        for y in range(y1, y2 + 1):
+            board[x1][y] = 'S'
+    else:
+        for x in range(x1, x2 + 1):
+            board[x][y1] = 'S'
 
-def imprimir_tabuleiro(tabuleiro, revelado, mostrar_navios=False):
-    cabecalho = "  " + " ".join(chr(65 + col) for col in range(len(tabuleiro[0])))
-    print(cabecalho)
+def player_setup(board, player, ship_size):
+    print_board(board)
+    coord = input(f"Jogador {player}, aonde deseja colocar o seu barco de {ship_size} posições? (ex: A0): ")
+    x, y = convert_coordinates(coord, len(board))
 
-    for linha, dados_linha in enumerate(tabuleiro):
-        linha_str = f"{linha} "
+    orientation = int(input("1. Para colocar na horizontal\n2. Para colocar na vertical\nEscolha a orientação: "))
 
-        for coluna, dados_coluna in enumerate(dados_linha):
+    if orientation == 1:
+        end_y = y + ship_size - 1
+        if 0 <= end_y < len(board[0]):
+            place_ship(board, (x, y), (x, end_y))
+        else:
+            print("Posição inválida. Tente novamente.")
+            player_setup(board, player, ship_size)
+    elif orientation == 2:
+        end_x = x + ship_size - 1
+        if 0 <= end_x < len(board):
+            place_ship(board, (x, y), (end_x, y))
+        else:
+            print("Posição inválida. Tente novamente.")
+            player_setup(board, player, ship_size)
+    else:
+        print("Escolha inválida. Tente novamente.")
+        player_setup(board, player, ship_size)
 
-            if mostrar_navios and tabuleiro[linha][coluna] == 'N':
-                linha_str += 'N '
-            elif revelado[linha][coluna]:
-                linha_str += dados_coluna + " "
-            else:
-                linha_str += ". "
-        print(linha_str)
-
-def contar_navios_adjacentes(tabuleiro, linha, coluna):
-    count = 0
-
-    for i in range(max(0, linha - 1), min(linha + 2, len(tabuleiro))):
-        for j in range(max(0, coluna - 1), min(coluna + 2, len(tabuleiro[0]))):
-            if tabuleiro[i][j] == 'N':
-                count += 1
-    return count
-
-def revelar_celula(tabuleiro, revelado, linha, coluna):
-
-    if revelado[linha][coluna]:
-        return False
-
-    revelado[linha][coluna] = True
-
-    if tabuleiro[linha][coluna] == 'N':
-        imprimir_tabuleiro(tabuleiro, revelado, mostrar_navios=True)
-        print("Você atingiu um navio!")
+def shoot(board, x, y):
+    if board[x][y] == 'S':
+        board[x][y] = 'X'
+        print("Acertou!")
+        return True
+    elif board[x][y] == '.':
+        board[x][y] = ' '
+        print("Errou!")
         return False
     else:
-        navios_proximos = contar_navios_adjacentes(tabuleiro, linha, coluna)
-        tabuleiro[linha][coluna] = str(navios_proximos) if navios_proximos > 0 else ' '
+        print("Você já atirou aqui. Tente novamente.")
         return False
 
-def mostrar_navios(tabuleiro, posicoes_navios):
-    
-    for posicao in posicoes_navios:
-        linha = posicao // len(tabuleiro[0])
-        coluna = posicao % len(tabuleiro[0])
-        tabuleiro[linha][coluna] = 'N'
+def reset_game():
+    return create_board(8), create_board(8)
 
-def verificar_vitoria(revelado, num_navios):
-    return sum(row.count(True) for row in revelado) == (len(revelado) * len(revelado[0]) - num_navios)
+def jogar_batalha_naval():
+    board_size = 8
+    player1_board, player2_board = reset_game()
 
-def main():
+    # Jogadores colocam seus navios
+    player_setup(player1_board, 1, 5)
+    player_setup(player1_board, 1, 4)
+    player_setup(player1_board, 1, 3)
+    player_setup(player1_board, 1, 3)
+    player_setup(player1_board, 1, 2)
 
-    linhas = 8
-    colunas = 8
-    num_navios = 10
+    player_setup(player2_board, 2, 5)
+    player_setup(player2_board, 2, 4)
+    player_setup(player2_board, 2, 3)
+    player_setup(player2_board, 2, 3)
+    player_setup(player2_board, 2, 2)
 
-    tabuleiro, posicoes_navios = criar_tabuleiro(linhas, colunas, num_navios)
+    current_player = 1
 
-    revelado = [[False for _ in range(colunas)] for _ in range(linhas)]
-    navios_mostrados = False
-
+    # Jogadores atiram um no outro
     while True:
+        print_board(player1_board) if current_player == 1 else print_hidden_board(player1_board)
+        print_board(player2_board) if current_player == 2 else print_hidden_board(player2_board)
 
-        if navios_mostrados:
-            imprimir_tabuleiro(tabuleiro, revelado, mostrar_navios=True)
+        print(f"Jogador {current_player}, atire!")
+        coord = input("Digite a coordenada (ex: A0): ")
+        x, y = convert_coordinates(coord, board_size)
+
+        if current_player == 1:
+            hit = shoot(player2_board, x, y)
+            if 'S' not in sum(player2_board, []):
+                print("Jogador 1 ganhou!")
+                vencedor = 1
+                return vencedor
+                
         else:
-            imprimir_tabuleiro(tabuleiro, revelado)
+            hit = shoot(player1_board, x, y)
+            if 'S' not in sum(player1_board, []):
+                print("Jogador 2 ganhou!")
+                vencedor = 2
+                return vencedor
 
-        entrada = input("Digite a célula a ser revelada (por exemplo, A1) ou !mostrar para revelar os navios: ")
-
-        if entrada.lower() == "!mostrar":
-            navios_mostrados = True
-            mostrar_navios(tabuleiro, posicoes_navios)
-            imprimir_tabuleiro(tabuleiro, revelado, mostrar_navios=True)
-            break
-
-        linha, coluna = converter_entrada_para_indices(entrada, (linhas, colunas))
-
-        if linha is None or coluna is None:
-            continue  
-
-        if revelar_celula(tabuleiro, revelado, linha, coluna):
-            navios_mostrados = True
-            mostrar_navios(tabuleiro, posicoes_navios)
-            imprimir_tabuleiro(tabuleiro, revelado, mostrar_navios=True)
-            print("Você atingiu um navio!")
-            break
-
-        if verificar_vitoria(revelado, num_navios):
-            navios_mostrados = True
-            imprimir_tabuleiro(tabuleiro, revelado, mostrar_navios=True)
-            print("Parabéns! Você destruiu todos os navios!")
-            break
-
-def converter_entrada_para_indices(jogada_user, tamanho_tabuleiro):
-
-    coluna_char = jogada_user[0].upper()
-    linha_str = jogada_user[1:]
-
-    if not coluna_char.isalpha() or not linha_str.isdigit():
-        print("Entrada inválida. Digite uma célula válida (por exemplo, A1) ou !mostrar para revelar os navios.")
-        return None, None
-
-    coluna = ord(coluna_char) - ord('A')
-
-    linha = int(linha_str)
-
-    if not (0 <= coluna < tamanho_tabuleiro[1]) or not (0 <= linha < tamanho_tabuleiro[0]):
-        print("Célula fora dos limites. Digite uma célula válida (por exemplo, A1) ou !mostrar para revelar os navios.")
-        return None, None
-
-    return linha, coluna
+        if not hit:
+            current_player = 3 - current_player  # Troca de jogador
 
 if __name__ == "__main__":
-    main()
+    jogar_batalha_naval()

@@ -5,11 +5,11 @@ def mover(tabuleiro, turno):
     espacos = random.randint(1, 6)  # dado de 1 a 6
     print(f"Jogador {turno + 1} lançou {espacos} no dado.")
     tabuleiro[turno] += espacos
-    if tabuleiro[turno] >= 30:  
+    if tabuleiro[turno] >= 30:
         print(f"Jogador {turno + 1} ganhou!")
         tabuleiro = [0, 0]
     else:
-        #  ações/consequências ao cair em certas casas
+        # ações/consequências ao cair em certas casas
         if tabuleiro[turno] in [3, 9, 15, 21, 27]:
             print(f"Jogador {turno + 1} caiu em uma casa especial e avança 2 casas!")
             tabuleiro[turno] += 2
@@ -20,12 +20,12 @@ def mover(tabuleiro, turno):
     return tabuleiro, turno
 
 def salvar(tabuleiro):
-    with open('jogo.json', 'w') as f:
+    with open('gloria.json', 'w') as f:
         json.dump(tabuleiro, f)
 
 def carregar():
     try:
-        with open('jogo.json', 'r') as f:
+        with open('gloria.json', 'r') as f:
             tabuleiro = json.load(f)
             print(f"O jogador X estava na posição {tabuleiro[0]}, O jogador O estava na posição {tabuleiro[1]}")
     except FileNotFoundError:
@@ -60,13 +60,17 @@ def desenhar_tabuleiro(tabuleiro):
     print('|')
     print('+---' * 30 + '+')
 
-tabuleiro = menu()
-turno = 0
+def jogar_gloria():
+    tabuleiro = menu()
+    turno = 0
 
-while True:
-    desenhar_tabuleiro(tabuleiro)
-    entrada_movimento = input(f"Jogador {turno + 1}, pressione enter para lançar o dado ou digite 'sair' para sair: ")
-    if entrada_movimento.lower() == 'sair':
-        salvar(tabuleiro)
-        break
-    tabuleiro, turno = mover(tabuleiro, turno)
+    while True:
+        desenhar_tabuleiro(tabuleiro)
+        entrada_movimento = input(f"Jogador {turno + 1}, pressione enter para lançar o dado ou digite 'sair' para sair: ")
+        if entrada_movimento.lower() == 'sair':
+            salvar(tabuleiro)
+            break
+        tabuleiro, turno = mover(tabuleiro, turno)
+
+if __name__ == "__main__":
+    jogar_gloria()

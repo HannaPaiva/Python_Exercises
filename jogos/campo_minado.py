@@ -107,7 +107,7 @@ def verificar_vitoria(revelado, num_bombas):
     return sum(row.count(True) for row in revelado) == (len(revelado) * len(revelado[0]) - num_bombas)
 
 
-def main():
+def jogar_campo_minado():
 
     linhas = 8
     colunas = 8
@@ -153,4 +153,4 @@ def main():
             break
 
 if __name__ == "__main__":
-    main()
+    jogar_campo_minado()

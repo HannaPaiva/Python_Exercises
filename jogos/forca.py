@@ -1,8 +1,9 @@
 import random
-#Palavras possíveis
+
+# Palavras possíveis
 palavras = ["cadeira", "mesa", "garrafa", "telefone", "biscoito", "mar"]
 
-index = random.randint(0,5)
+index = random.randint(0, 5)
 letras_certas = []
 
 tentativas = 0
@@ -10,21 +11,15 @@ venceu = False
 palavra_certa = palavras[index]
 
 def welcome():
-    
-    print()
-    print()
-    print()
-    print("Bem-vindo ao jogo da forca! Vamos jogar!")
-    print()
-    # print("Esta é a palavra: ")
+    print("\n\n\nBem-vindo ao jogo da forca! Vamos jogar!\n")
 
 def transformar_em_underscores(palavra):
-    '''função que retorna o tamanho da string em underscores'''
-    palavra_transformada = "_"* len(palavra)
+    '''Função que retorna o tamanho da string em underscores'''
+    palavra_transformada = "_" * len(palavra)
     return palavra_transformada
 
 def escolher_letra():
-    '''Função de input. '''
+    '''Função de input.'''
     while True:
         try:
             letra = input("Digite uma letra: ").lower()
@@ -35,128 +30,103 @@ def escolher_letra():
         except IndexError:
             print("Erro na inserção. Tem certeza que inseriu uma letra?")
 
-
-
 def verificar_letra(letra, letras_certas, palavra_certa, tentativas):
-        
     if letra in letras_certas:
-            print("Essa letra já foi inserida")
-
+        print("Essa letra já foi inserida")
     elif letra in palavra_certa:
-            print("A letra existe!")
-            letras_certas.append(letra)
-        
+        print("A letra existe!")
+        letras_certas.append(letra)
     if letra not in palavra_certa:
-            tentativas = tentativas + 1
-            print(erros(tentativas))
-            chances = 6-tentativas
-            if chances < 1:
-                print(f"Letra não encontrada. Você pode errar mais {chances} vezes ")
-            else:
-                print(f"Letra não encontrada. Você pode errar mais {chances} vez ")
+        tentativas = tentativas + 1
+        print(erros(tentativas))
+        chances = 6 - tentativas
+        if chances == 1:
+            print(f"Letra não encontrada. Você pode errar mais {chances} vez ")
+        else:
+            print(f"Letra não encontrada. Você pode errar mais {chances} vezes ")
     return tentativas
-        
-
 
 def escrever_letra(palavra_certa, letras_certas):
-     
-     escrever = ""
-     for letra in palavra_certa:
-          if letra in letras_certas:
-               escrever = escrever+ letra
-          else:
-               escrever = escrever + "_"
-
-     return escrever
-
+    escrever = ""
+    for letra in palavra_certa:
+        if letra in letras_certas:
+            escrever = escrever + letra
+        else:
+            escrever = escrever + "_"
+    return escrever
 
 def erros(tentativas):
     match tentativas:
         case 1:
-              print(r'''  +---+
+            print(r'''  +---+
     |   |
     O   |
         |
         |
         |
-        |
-            ''')
-        case 2: 
-             print(r'''   +---+
+        |''')
+        case 2:
+            print(r'''   +---+
     |   |
     O   |
     |   |
     |   |
         |
-        |
-            ''')
+        |''')
         case 3:
-                print(r'''   +---+
+            print(r'''   +---+
     |   |
     O   |
     |\  |
     |   |
         |
-        |
-            ''')
+        |''')
         case 4:
-                print(r'''   +---+
+            print(r'''   +---+
     |   |
     O   |
    /|\  |
     |   |
         |
-        |
-            ''')
-                
+        |''')
         case 5:
-                print(r'''   +---+
+            print(r'''   +---+
     |   |
     O   |
    /|\  |
     |   |
      \  |
-        |
-            ''')
+        |''')
         case 6:
-                print(r'''   +---+
+            print(r'''   +---+
     |   |
     O   |
    /|\  |
     |   |
    / \  |
-        |
-            ''')
+        |''')
 
+def jogar_forca():
+    welcome()
+    print(palavra_certa)
+    palavra_transformada = transformar_em_underscores(palavra_certa)
+    print(palavra_transformada)
 
+    while True:
+        resultado = ""
+        if tentativas != 6:
+            letra = escolher_letra()
+            tentativas = verificar_letra(letra, letras_certas, palavra_certa, tentativas)
+            resultado = escrever_letra(palavra_certa, letras_certas)
+            print("Resultado: ", resultado)
+            if resultado == palavra_certa:
+                print("Parabéns! Você venceu!")
+                break
+        else:
+            print("Perdeu! Você não conseguiu adivinhar a palavra.")
+            break
 
+    print("Fim do jogo")
 
-
-welcome()
-
-print(palavra_certa)
-
-palavra_transformada = transformar_em_underscores(palavra_certa)
-
-print(palavra_transformada)
-
-
-while True:
-    
-   
-    resultado = ""
-    if tentativas != 6:
-        letra = escolher_letra()
-        tentativas = verificar_letra(letra, letras_certas, palavra_certa, tentativas)
-        resultado = escrever_letra(palavra_certa, letras_certas)
-        print ("Resultado: ", resultado)
-        if resultado == palavra_certa:
-             print("Parabéns! WIN WIN AND HIS NAME IS JHOON CENAAA PAMPAMRAMPAM")
-             break
-    
-    else:
-         print("Perdeu! Você perdeu! IHIHIHI")
-         break
-    
-
-print("Fim do jogo")
+if __name__ == "__main__":
+    jogar_forca()
