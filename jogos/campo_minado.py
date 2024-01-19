@@ -126,7 +126,7 @@ def jogar_campo_minado():
         else:
             imprimir_tabuleiro(tabuleiro, revelado)
 
-        entrada = input("Digite a célula a ser revelada (por exemplo, A1) ou !mostrar para revelar as bombas: ")
+        entrada = input("Digite a célula a ser revelada (por exemplo, A1) ")
 
         if entrada.lower() == "!mostrar":
             bombas_mostradas = True

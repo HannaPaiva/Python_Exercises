@@ -2,20 +2,20 @@ import json
 import os.path
 import gloria as gloria
 import forca as forca
-
 import quatro_em_linha as quatro_em_linha
-
 import batalha_naval as batalha_naval
 import batalha_naval_computador as batalha_naval_computador
-
 import campo_minado as campo_minado
-
 import velha as velha
 import velha_computador as velha_computador
+import quatro_em_linha_computador as quatro_em_linha_computador
 
 def jogo_4_em_linha():
     quatro_em_linha.jogar_quatro_em_linha()
-   
+
+def jogo_4_em_linha_computador():
+    quatro_em_linha_computador.jogar_4_em_linha_computador() 
+
 
 def jogo_batalha_naval():
     
@@ -30,17 +30,6 @@ def jogo_batalha_naval():
             batalha_naval.reset_game()
    
 
-def jogo_da_velha():
-    while True:
-        resultado = velha.jogar_velha()
-        print(f"Jogador vencedor: {resultado}")
-
-        jogar_novamente = input("Deseja jogar novamente? (s/n): ")
-        if jogar_novamente.lower() != "s":
-            return resultado  # Retorna o resultado se o jogador não quiser jogar novamente
-        else:
-            velha.limpar_tabuleiro()
-
 def jogar_velha_computador():
     while True:
         resultado = velha_computador.jogar_velha()
@@ -50,9 +39,11 @@ def jogar_velha_computador():
         if jogar_novamente.lower() != "s":
             return resultado  # Retorna o resultado se o jogador não quiser jogar novamente
 
+
+
 def jogo_forca():
     forca.jogar_forca()
-    pass
+
 
 def jogo_gloria():
     gloria.jogar_gloria()
@@ -83,16 +74,28 @@ def atualizar_scores(dados_jogos, jogador1, jogador2, resultado):
         return vitorias_jg1, vitorias_jg2
 
 def jogar_computador(opcao_jogo):
-    if opcao_jogo == "1":  # Jogo da Velha
+    if opcao_jogo == "1": 
         return jogar_velha_computador()
     elif opcao_jogo == "2":
-        # Adicione a lógica para outros jogos
-        resultado = 0  # Simples exemplo de um jogo fictício
-        print(f"Jogador vencedor: {resultado}")
+        return jogo_4_em_linha_computador()
+    elif opcao_jogo == "3":
+        return batalha_naval_computador.jogar_batalha_naval_computador() 
+    elif opcao_jogo == "4":
+       print("Não implementado")
+       return
+    elif opcao_jogo == "5":
+       print("Não implementado")
+       return
+    elif opcao_jogo == "6":
+       print("Não implementado")
+       return
 
-        jogar_novamente = input("Deseja jogar novamente? (s/n): ")
-        if jogar_novamente.lower() != "s":
-            return resultado  
+    resultado = 0 
+    print(f"Jogador vencedor: {resultado}")
+
+    jogar_novamente = input("Deseja jogar novamente? (s/n): ")
+    if jogar_novamente.lower() != "s":
+        return resultado  
     else:
         resultado = 0
         print(f"Jogador vencedor: {resultado}")
@@ -131,7 +134,7 @@ def main():
                 resultado = jogar_computador(opcao_jogo)
             else:
                 if opcao_jogo == "1":
-                    resultado = jogo_da_velha()  # retorna 1 se o jogador 1 ganhou, 2 se o jogador 2 ganhou, 0 se foi empate
+                    resultado = jogo_da_velha(jogador1, jogador2)  # retorna 1 se o jogador 1 ganhou, 2 se o jogador 2 ganhou, 0 se foi empate
                 elif opcao_jogo == "2":
                     jogo_4_em_linha()
                 elif opcao_jogo == "3":
@@ -158,12 +161,38 @@ def main():
 
         elif opcao_jogo == "10":
             print("Histórico de Jogos:")
-            print(json.dumps(dados_jogos, indent=2))
+            visualizar_historico()
         elif opcao_jogo.lower() == "x":
             print("Saindo...")
             break
         else:
             print("Opção inválida. Tente novamente.")
+
+
+def jogo_da_velha(jogador1, jogador2):
+    return velha.jogo_velha(jogador1, jogador2)
+
+def salvar_relatorio(relatorio):
+    try:
+        with open("relatorio.json", "r") as arquivo:
+            dados_antigos = json.load(arquivo)
+    except FileNotFoundError:
+        dados_antigos = []
+
+    dados_antigos.append(relatorio)
+
+    with open("relatorio.json", "w") as arquivo:
+        json.dump(dados_antigos, arquivo, indent=2)
+
+def visualizar_historico():
+    try:
+        with open("relatorio.json", "r") as arquivo:
+            historico = json.load(arquivo)
+            for jogo in historico:
+                print(json.dumps(jogo, indent=2))
+    except FileNotFoundError:
+        print("Nenhum histórico disponível.")
+
 
 if __name__ == "__main__":
     main()

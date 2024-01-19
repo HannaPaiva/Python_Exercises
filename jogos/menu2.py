@@ -1,20 +1,57 @@
-import json
-import os.path
-import velha as velha
+# menu.py
+
 import json
 import os.path
 import gloria as gloria
 import forca as forca
-
 import quatro_em_linha as quatro_em_linha
-
 import batalha_naval as batalha_naval
 import batalha_naval_computador as batalha_naval_computador
-
 import campo_minado as campo_minado
-
 import velha as velha
+
+import velha2 as velha
 import velha_computador as velha_computador
+
+def jogo_4_em_linha():
+    quatro_em_linha.jogar_quatro_em_linha()
+
+def jogo_batalha_naval():
+    while True:
+        resultado = batalha_naval.jogar_batalha_naval()
+        print(f"Jogador vencedor: {resultado}")
+        jogar_novamente = input("Deseja jogar novamente? (s/n): ")
+        if jogar_novamente.lower() != "s":
+            return resultado
+        else:
+            batalha_naval.reset_game()
+
+def jogo_da_velha():
+    while True:
+        resultado = velha.jogar_velha()
+        print(f"Jogador vencedor: {resultado}")
+        jogar_novamente = input("Deseja jogar novamente? (s/n): ")
+        if jogar_novamente.lower() != "s":
+            return resultado
+        else:
+            velha.limpar_tabuleiro()
+
+def jogar_velha_computador():
+    while True:
+        resultado = velha_computador.jogar_velha()
+        print(f"Jogador vencedor: {resultado}")
+        jogar_novamente = input("Deseja jogar novamente? (s/n): ")
+        if jogar_novamente.lower() != "s":
+            return resultado
+
+def jogo_forca():
+    forca.jogar_forca()
+
+def jogo_gloria():
+    gloria.jogar_gloria()
+
+def jogo_campo_minado():
+    campo_minado.jogar_campo_minado()
 
 def carregar_dados_jogos():
     if os.path.exists("historico_jogos.json"):
@@ -30,35 +67,28 @@ def atualizar_scores(dados_jogos, jogador1, jogador2, resultado):
     vitorias_jg1 = sum(jogo["vitoriasjg1"] for jogo in dados_jogos if jogo["jogador1"] == jogador1)
     vitorias_jg2 = sum(jogo["vitoriasjg2"] for jogo in dados_jogos if jogo["jogador2"] == jogador2)
 
-    if vitorias_jg1 > vitorias_jg2:
-        return 3 * vitorias_jg1, 0
-    elif vitorias_jg2 > vitorias_jg1:
-        return 0, 3 * vitorias_jg2
-    else:
-        return vitorias_jg1, vitorias_jg2
+    if resultado == 1:
+        vitorias_jg1 += 1
+    elif resultado == 2:
+        vitorias_jg2 += 1
 
-def jogar_computador(opcao_jogo, jogador1):
-    if opcao_jogo == "1":
-        return velha.jogar_velha(jogador1)
+    return vitorias_jg1, vitorias_jg2
+
+def jogar_computador(opcao_jogo):
+    if opcao_jogo == "1":  # Jogo da Velha
+        return jogar_velha_computador()
     elif opcao_jogo == "2":
-        # Adicione a lógica para outros jogos
-        resultado = 0  # Simples exemplo de um jogo fictício
+        resultado = 0  # Lógica para outros jogos
         print(f"Jogador vencedor: {resultado}")
-
         jogar_novamente = input("Deseja jogar novamente? (s/n): ")
         if jogar_novamente.lower() != "s":
-            return resultado  
+            return resultado
     else:
-        resultado = 0
+        resultado = 0  # Lógica para outros jogos
         print(f"Jogador vencedor: {resultado}")
-
         jogar_novamente = input("Deseja jogar novamente? (s/n): ")
         if jogar_novamente.lower() != "s":
-            return resultado  # Retorna o resultado se o jogador não quiser jogar novamente
-
-
-
-# ...
+            return resultado
 
 def main():
     dados_jogos = carregar_dados_jogos()
@@ -87,23 +117,25 @@ def main():
                 jogador2 = "Computador"
 
             if modo_jogo == "2":
+                resultado = jogar_computador(opcao_jogo)
+            else:
                 if opcao_jogo == "1":
-                    resultado = velha.jogar_velha(jogador1)
+                    resultado = jogo_da_velha(jogador1, jogador2)
                 elif opcao_jogo == "2":
-                    resultado = jogo_4_em_linha()
-                else:
-                    resultado = 0
-                    print(f"Jogador vencedor: {resultado}")
+                    jogo_4_em_linha()
+                elif opcao_jogo == "3":
+                    jogo_batalha_naval()
+                elif opcao_jogo == "4":
+                    jogo_forca()
+                elif opcao_jogo == "5":
+                    jogo_campo_minado()
+                elif opcao_jogo == "6":
+                    jogo_gloria()
 
-                    jogar_novamente = input("Deseja jogar novamente? (s/n): ")
-                    if jogar_novamente.lower() != "s":
-                        return resultado  # Retorna o resultado se o jogador não quiser jogar novamente
+                nome_jogo = "velha"  # Ou adapte conforme o jogo selecionado
 
-                nomejogo = "4_em_linha"  # Ou adapte conforme o jogo selecionado
-
-                # Registrar o resultado do jogo no histórico
                 pontos_jg1, pontos_jg2 = atualizar_scores(dados_jogos, jogador1, jogador2, resultado)
-                dados_jogos.append({"nomejogo": nomejogo, "jogador1": jogador1, "jogador2": jogador2,
+                dados_jogos.append({"nomejogo": nome_jogo, "jogador1": jogador1, "jogador2": jogador2,
                                     "vitoriasjg1": int(resultado == 1), "vitoriasjg2": int(resultado == 2),
                                     "pontosjg1": pontos_jg1, "pontosjg2": pontos_jg2})
 
@@ -123,5 +155,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

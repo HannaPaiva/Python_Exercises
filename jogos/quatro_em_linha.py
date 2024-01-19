@@ -47,6 +47,20 @@ def jogar_quatro_em_linha():
                 print("Jogador " + vez + " venceu!")
                 return
 
+        # Verificar se há um vencedor (diagonalmente)
+        for i in range(linhas - 3):
+            for j in range(colunas - 3):
+                if tabuleiro[i][j] == tabuleiro[i + 1][j + 1] == tabuleiro[i + 2][j + 2] == tabuleiro[i + 3][j + 3] != " ":
+                    for row in tabuleiro:
+                        print("|".join(row))
+                    print("Jogador " + vez + " venceu!")
+                    return
+                elif tabuleiro[i][j + 3] == tabuleiro[i + 1][j + 2] == tabuleiro[i + 2][j + 1] == tabuleiro[i + 3][j] != " ":
+                    for row in tabuleiro:
+                        print("|".join(row))
+                    print("Jogador " + vez + " venceu!")
+                    return
+
         if vez == "X":
             vez = "O"
         else:

@@ -18,9 +18,9 @@ def verificar_vitoria(tabuleiro, simbolo):
             return True
     return False
 
-def jogo_velha(jogador1, jogador2):
+def jogo_velha():
     simbolos = ["X", "O"]
-    jogadores = [jogador1, jogador2]
+    jogadores = [input("Nome do jogador 1: "), input("Nome do jogador 2: ")]
     vitorias = [0, 0]
 
     while True:
