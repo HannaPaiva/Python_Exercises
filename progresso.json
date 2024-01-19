@@ -1,0 +1,24 @@
+{
+    "jogador1": "akkaka",
+    "jogador2": "kasaad",
+    "tabuleiro": [
+        [
+            " ",
+            " ",
+            " "
+        ],
+        [
+            " ",
+            " ",
+            " "
+        ],
+        [
+            " ",
+            " ",
+            " "
+        ]
+    ],
+    "turno": 1,
+    "pontos_jogador1": 2,
+    "pontos_jogador2": 0
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "nomejogo": "velha",
+    "jogador1": "1",
+    "jogador2": "1",
+    "vitoriasjg1": 1,
+    "vitoriasjg2": 0,
+    "pontosjg1": 2,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "2",
+    "jogador2": "3",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 4,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "Pilatus",
+    "jogador2": "Ponsul",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 3,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "poly",
+    "jogador2": "dance",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 3,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "pa",
+    "jogador2": "lla",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 1,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "2",
+    "jogador2": "3",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 3,
+    "pontosjg2": 0
+  }
+]

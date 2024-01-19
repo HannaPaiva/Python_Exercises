@@ -115,5 +115,77 @@
     "vitoriasjg2": 0,
     "pontosjg1": 0,
     "pontosjg2": 0
+  },
+  {
+    "nomejogo": "4_em_linha",
+    "jogador1": "Polta",
+    "jogador2": "Computador",
+    "vitoriasjg1": 1,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "pol",
+    "jogador2": "naref",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "Pao de deus",
+    "jogador2": "Eu curto p\u00e3o de eus",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "pic8",
+    "jogador2": "pi7",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "1",
+    "jogador2": "1",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 1,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "dIANA",
+    "jogador2": "Computador",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "kakkakak",
+    "jogador2": "kakakkakakkaka",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "Paulo",
+    "jogador2": "Santaa",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
   }
 ]

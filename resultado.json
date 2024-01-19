@@ -1,0 +1,29 @@
+[
+    {
+        "nomejogo": "velha",
+        "jogador1": "1",
+        "jogador2": "1",
+        "vitoriasjg1": 1,
+        "vitoriasjg2": 0,
+        "pontosjg1": 1,
+        "pontosjg2": 0
+    },
+    {
+        "nomejogo": "velha",
+        "jogador1": "Kratos",
+        "jogador2": "Zeus",
+        "vitoriasjg1": 4,
+        "vitoriasjg2": 0,
+        "pontosjg1": 0,
+        "pontosjg2": 0
+    },
+    {
+        "nomejogo": "velha",
+        "jogador1": "akkaka",
+        "jogador2": "kasaad",
+        "vitoriasjg1": 2,
+        "vitoriasjg2": 0,
+        "pontosjg1": 2,
+        "pontosjg2": 0
+    }
+]
