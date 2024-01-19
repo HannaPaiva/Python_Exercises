@@ -134,10 +134,10 @@ def jogar_forca():
             # Tentar carregar um jogo anterior
             estado_jogo_anterior = carregar_jogo()
             if estado_jogo_anterior:
-                # Perguntar ao usuário se quer continuar o jogo anterior ou começar um novo
+             
                 opcao = input("Você tem um jogo salvo. Digite 1 para começar um novo jogo ou 2 para continuar: ")
                 if opcao == "2":
-                    # Carregar as variáveis do jogo anterior
+                 
                     letras_certas = estado_jogo_anterior["letras_certas"]
                     tentativas = estado_jogo_anterior["tentativas"]
                     palavra_certa = estado_jogo_anterior["palavra_certa"]
@@ -151,13 +151,15 @@ def jogar_forca():
             resultado = ""
             if tentativas != 6:
                 letra = escolher_letra()
-                # Verificar se o usuário quer sair do jogo
+              
                 if letra == ".":
                     sair = True
                     break
                 tentativas = verificar_letra(letra, letras_certas, palavra_certa, tentativas)
                 resultado = escrever_letra(palavra_certa, letras_certas)
+
                 print("Resultado: ", resultado)
+                
                 if resultado == palavra_certa:
                     print("Parabéns! VENCEU!!")
                     venceu = True

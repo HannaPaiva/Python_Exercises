@@ -10,17 +10,14 @@ import velha as velha
 import velha_computador as velha_computador
 import quatro_em_linha_computador as quatro_em_linha_computador
 
-
+#jogos
 def jogo_4_em_linha():
-
     quatro_em_linha.jogar_quatro_em_linha()
 
 def jogo_4_em_linha_computador():
     quatro_em_linha_computador.jogar_quatro_em_linha() 
 
-
 def jogo_batalha_naval():
-    
     while True:
         resultado = batalha_naval.jogar_batalha_naval()
         print(f"Jogador vencedor: {resultado}")
@@ -30,7 +27,6 @@ def jogo_batalha_naval():
             return resultado 
         else:
             batalha_naval.reset_game()
-   
 
 def jogar_velha_computador():
     while True:
@@ -39,12 +35,13 @@ def jogar_velha_computador():
 
         jogar_novamente = input("Deseja jogar novamente? (s/n): ")
         if jogar_novamente.lower() != "s":
-            return resultado  # Retorna o resultado se o jogador não quiser jogar novamente
-
-
+            return resultado  
 
 def jogo_forca():
     forca.jogar_forca()
+
+def jogo_da_velha(jogador1, jogador2):
+    return velha.jogo_velha(jogador1, jogador2)
 
 
 def jogo_gloria():
@@ -154,13 +151,15 @@ def main():
                 elif opcao_jogo == "6":
                     nomejogo = "glória"
                     resultado = jogo_gloria()
-
                
-               
-              
                 pontos_jg1, pontos_jg2 = atualizar_scores(dados_jogos, jogador1, jogador2, resultado)
-                dados_jogos.append({"nomejogo": nomejogo, "jogador1": jogador1, "jogador2": jogador2,
-                                    "vitoriasjg1": int(resultado == 1), "vitoriasjg2": int(resultado == 2),
+                dados_jogos.append({
+                                    "nomejogo": nomejogo, "jogador1": jogador1, "jogador2": jogador2,
+                                    
+                                    "vitoriasjg1": int(resultado == 1), 
+                                    
+                                    "vitoriasjg2": int(resultado == 2),
+
                                     "pontosjg1": pontos_jg1, "pontosjg2": pontos_jg2})
 
                 salvar_dados_jogos(dados_jogos)
@@ -178,8 +177,7 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
-def jogo_da_velha(jogador1, jogador2):
-    return velha.jogo_velha(jogador1, jogador2)
+
 
 def salvar_relatorio(relatorio):
     try:

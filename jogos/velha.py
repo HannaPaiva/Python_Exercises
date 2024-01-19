@@ -34,7 +34,11 @@ def jogo_velha(jogador1, jogador2):
                 for i in range(2):
                     imprimir_tabuleiro(tabuleiro)
                     print(f"\nTurno de {jogadores[i]} ({simbolos[i]})")
-                    posicao = int(input("Escolha uma posição (1 a 9): ")) - 1
+                    try: 
+
+                        posicao = int(input("Escolha uma posição (1 a 9): ")) - 1
+                    except:
+                        print("Insira algo válido")
 
                     while tabuleiro[posicao] != " ":
                         print("Posição ocupada. Escolha outra.")
@@ -57,7 +61,9 @@ def jogo_velha(jogador1, jogador2):
                     break
 
             partidas += 1 # Incrementa o contador de partidas
+
             imprimir_tabuleiro(tabuleiro) # Imprime o tabuleiro final da partida
+
             print(f"\n{jogadores[0]} está com {pontuacao[0]} pontos.")
             print(f"{jogadores[1]} está com {pontuacao[1]} pontos.")
 
@@ -94,4 +100,6 @@ def jogo_velha(jogador1, jogador2):
     return relatorio
 
 if __name__ == "__main__":
-    jogo_velha()
+    jg1 = input("Jogador 1: ")
+    jg2 = input("Jogador 2: ")
+    jogo_velha(jg1, jg2)
