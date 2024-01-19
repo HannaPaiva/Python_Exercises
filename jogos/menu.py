@@ -10,11 +10,13 @@ import velha as velha
 import velha_computador as velha_computador
 import quatro_em_linha_computador as quatro_em_linha_computador
 
+
 def jogo_4_em_linha():
+
     quatro_em_linha.jogar_quatro_em_linha()
 
 def jogo_4_em_linha_computador():
-    quatro_em_linha_computador.jogar_4_em_linha_computador() 
+    quatro_em_linha_computador.jogar_quatro_em_linha() 
 
 
 def jogo_batalha_naval():
@@ -117,7 +119,7 @@ def main():
         print("6. Glória")
         print("10. Visualizar histórico de jogos")
         print("x. Sair")
-
+        nomejogo = "" 
         opcao_jogo = input("Escolha um jogo: ")
 
         if opcao_jogo in ["1", "2", "3", "4", "5", "6"]:
@@ -126,6 +128,7 @@ def main():
             modo_jogo = input("Escolha o modo de jogo (1 para 2 jogadores, 2 para jogar contra o computador): ")
 
             if modo_jogo == "1":
+                nomejogo = "velha" 
                 jogador2 = input("Digite o nome do Jogador 2: ")
             else:
                 jogador2 = "Computador"
@@ -134,21 +137,27 @@ def main():
                 resultado = jogar_computador(opcao_jogo)
             else:
                 if opcao_jogo == "1":
+                    nomejogo = "velha " 
                     resultado = jogo_da_velha(jogador1, jogador2)  # retorna 1 se o jogador 1 ganhou, 2 se o jogador 2 ganhou, 0 se foi empate
                 elif opcao_jogo == "2":
+                    nomejogo = "4 em linha" 
                     jogo_4_em_linha()
                 elif opcao_jogo == "3":
+                    nomejogo = "batalha naval"
                     jogo_batalha_naval()
                 elif opcao_jogo == "4":
-                    jogo_forca()
+                    nomejogo = "forca"
+                    resultado = jogo_forca()
                 elif opcao_jogo == "5":
-                    jogo_campo_minado()
+                    nomejogo = "campo minado"
+                    resultado = jogo_campo_minado()
                 elif opcao_jogo == "6":
-                    jogo_gloria()
+                    nomejogo = "glória"
+                    resultado = jogo_gloria()
 
-                nomejogo = "velha"  # Ou adapte conforme o jogo selecionado
-
-                # Registrar o resultado do jogo no histórico
+               
+               
+              
                 pontos_jg1, pontos_jg2 = atualizar_scores(dados_jogos, jogador1, jogador2, resultado)
                 dados_jogos.append({"nomejogo": nomejogo, "jogador1": jogador1, "jogador2": jogador2,
                                     "vitoriasjg1": int(resultado == 1), "vitoriasjg2": int(resultado == 2),
@@ -195,4 +204,15 @@ def visualizar_historico():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        while True:
+          
+            main()
+
+    except KeyboardInterrupt:
+        print("Não pode dar ctrc+C")
+        try:
+             while True:
+              main()
+        except KeyboardInterrupt:
+             print("Você deve estar muito desesperado mesmo, pode dar ctrc+C")

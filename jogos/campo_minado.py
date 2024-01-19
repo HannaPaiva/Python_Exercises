@@ -144,13 +144,12 @@ def jogar_campo_minado():
             mostrar_bombas(tabuleiro, posicoes_bombas)
             imprimir_tabuleiro(tabuleiro, revelado, mostrar_bombas=True)
             print("Você perdeu! Uma bomba foi detonada.")
-            break
-
+            return 0
         if verificar_vitoria(revelado, num_bombas):
             bombas_mostradas = True
             imprimir_tabuleiro(tabuleiro, revelado, mostrar_bombas=True)
             print("Parabéns! Você venceu!")
-            break
+            return 1
 
 if __name__ == "__main__":
     jogar_campo_minado()

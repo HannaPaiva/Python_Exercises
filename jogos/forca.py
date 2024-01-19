@@ -161,9 +161,11 @@ def jogar_forca():
                 if resultado == palavra_certa:
                     print("Parabéns! VENCEU!!")
                     venceu = True
+                    return 1
             else:
                 print("OOOPPS! Você perdeu!")
                 venceu = True
+                return 0
 
         # Salvar o estado atual do jogo
         salvar_jogo(letras_certas, tentativas, palavra_certa)

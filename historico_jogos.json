@@ -187,5 +187,50 @@
     "vitoriasjg2": 0,
     "pontosjg1": 0,
     "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "papa",
+    "jogador2": "papaaa",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "velha",
+    "jogador1": "a",
+    "jogador2": "s",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "forca",
+    "jogador1": "1",
+    "jogador2": "eeee",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 3,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "campo minado",
+    "jogador1": "ppappaa",
+    "jogador2": "lalal",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
+  },
+  {
+    "nomejogo": "gl\u00f3ria",
+    "jogador1": "ll",
+    "jogador2": "ppppppppppp",
+    "vitoriasjg1": 0,
+    "vitoriasjg2": 0,
+    "pontosjg1": 0,
+    "pontosjg2": 0
   }
 ]
