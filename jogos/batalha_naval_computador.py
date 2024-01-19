@@ -155,7 +155,7 @@ def jogar_batalha_naval():
     configurar_jogador(tabuleiro_jogador1, 1, 3)
     configurar_jogador(tabuleiro_jogador1, 1, 2)
 
-    # Configurar navios para o computador (Jogador 2)
+    # computador navios
     for tamanho_navio in [5, 4, 3, 3, 2]:
         while True:
             x, y = escolher_coordenadas_aleatorias(tamanho_tabuleiro)
@@ -174,7 +174,7 @@ def jogar_batalha_naval():
 
     jogador_atual = 1
 
-    # Jogadores atiram um no outro
+    # Jogadores atirando
     while True:
         imprimir_tabuleiro(tabuleiro_jogador1) if jogador_atual == 1 else imprimir_tabuleiro_oculto(tabuleiro_jogador1)
         imprimir_tabuleiro(tabuleiro_jogador2) if jogador_atual == 2 else imprimir_tabuleiro_oculto(tabuleiro_jogador2)

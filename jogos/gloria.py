@@ -34,7 +34,6 @@ def carregar():
     try:
         with open('gloria.json', 'r') as f:
             tabuleiro = json.load(f)
-
             print(f"O jogador X estava na posição {tabuleiro[0]}, O jogador O estava na posição {tabuleiro[1]}")
 
 
